@@ -42,6 +42,13 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let username = UserDefaults.standard.value(forKey: "username") as? String, let password = UserDefaults.standard.value(forKey: "password") as? String {
+            
+            Services().getLogin(username: username , password: password) { (data) in
+                self.performSegue(withIdentifier: "getUser", sender: data)
+            }
+        }
         self.setupView()
     }
     
@@ -77,8 +84,12 @@ class ViewController: UIViewController {
             let password = self.passwordTextField.text ?? ""
             
             guard let cust = segue.destination as? CustomerListViewController else{return}
-            cust.username = username
-            cust.password = password
+            if sender != nil {
+                cust.loginModel = sender as? LoginModel
+            }else{
+                cust.username = username
+                cust.password = password
+            }
         }
     }
 }

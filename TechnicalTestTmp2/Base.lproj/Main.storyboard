@@ -12,11 +12,12 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TechnicalTestTmp2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="xgw-p7-kX3"/>
                     <connections>
                         <segue destination="A3v-de-rX4" kind="show" identifier="getUser" id="cCZ-K3-wks"/>
                     </connections>
@@ -38,6 +39,7 @@
                     <navigationItem key="navigationItem" id="57p-2b-R3y"/>
                     <connections>
                         <segue destination="WSZ-P8-mNc" kind="show" identifier="customerDetails" id="ubC-sC-fja"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="LoginPage" id="Iu1-c5-aTo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j1F-NZ-Et4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

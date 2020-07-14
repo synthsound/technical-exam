@@ -52,6 +52,8 @@ class CustomerListViewController: UIViewController,UITableViewDelegate,UITableVi
         self.view.addSubview(self.logoutBtn)
         
         
+        self.logoutBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        self.logoutBtn.widthAnchor.constraint(equalToConstant: 100).isActive = true
         self.logoutBtn.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         self.logoutBtn.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         
@@ -59,6 +61,7 @@ class CustomerListViewController: UIViewController,UITableViewDelegate,UITableVi
         self.customerListTableView.topAnchor.constraint(equalTo: self.logoutBtn.bottomAnchor,constant: 10).isActive = true
         self.customerListTableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         self.customerListTableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        self.customerListTableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
         
     }
@@ -80,7 +83,7 @@ class CustomerListViewController: UIViewController,UITableViewDelegate,UITableVi
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let customerId = self.loginModel?.customers[indexPath.row]["id"] as! String
         
@@ -89,9 +92,15 @@ class CustomerListViewController: UIViewController,UITableViewDelegate,UITableVi
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        if segue.identifier == "customerDetails" {
         guard let custDetail = segue.destination as? CustomerDetailViewController else{return}
         custDetail.token = self.loginModel?.token
         custDetail.customerId = sender as? String
+        }
+        
+        if segue.identifier == "LoginPage" {
+             guard let _ = segue.destination as? ViewController else{return}
+        }
     }
     
     @objc func logout(){
@@ -99,6 +108,11 @@ class CustomerListViewController: UIViewController,UITableViewDelegate,UITableVi
         self.loginModel?.token = ""
         self.loginModel?.status = 0
         self.customerListTableView.reloadData()
+        
+        UserDefaults.standard.removeObject(forKey: "username")
+        UserDefaults.standard.removeObject(forKey: "password")
+        
+        performSegue(withIdentifier: "LoginPage",sender: nil)
     }
     
 }

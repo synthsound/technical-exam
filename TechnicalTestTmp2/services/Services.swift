@@ -37,6 +37,11 @@ class Services {
                 
                 let loginModel = LoginModel(status:status,token:token, customers: customers)
                 
+                if status == 200 {
+                    UserDefaults.standard.set(username, forKey: "username")
+                    UserDefaults.standard.set(password, forKey: "password")
+                }
+                
                 completion(loginModel)
             }
         }
